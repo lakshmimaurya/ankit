@@ -1,0 +1,14 @@
+main {
+  margin-top: 5rem;
+}
+
+hr {
+  width: 10% !important;
+  border-top: 2px solid#ff9800 !important;
+}
+
+@media screen and (max-width:524px) {
+  .nav {
+    display: block;
+  }
+}

@@ -1,0 +1,12 @@
+main {
+  margin-top: 5rem;
+}
+
+hr {
+  width: 8% !important;
+  border-top: 2px solid#ff9800 !important;
+}
+
+.rounded-circle {
+  box-shadow: 0 2px 5px 0 #ff9800,0 2px 10px 0 #ff9800!important;
+}

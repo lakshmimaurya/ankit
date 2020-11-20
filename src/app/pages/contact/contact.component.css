@@ -1,0 +1,21 @@
+main {
+  margin-top: 5rem;
+}
+
+.map-container {
+  height: 280px;
+  position: relative;
+}
+
+.map-container iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+hr {
+  width: 20% !important;
+  border-top: 2px solid#ff9800 !important;
+}

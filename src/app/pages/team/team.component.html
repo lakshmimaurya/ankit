@@ -1,0 +1,103 @@
+<main class="grey lighten-5">
+  <div class="container pt-3 mt-5 pb-5">
+    <section class="p-md-3 mx-md-5 text-lg-left white z-depth-1">
+      <h2 class="text-center h2 mb-0 mt-5">Our Team</h2>
+      <hr>
+      <p class="text-center lead mb-5 pb-2 text-muted">Unity is strength, when there is teamwork and collaboration, wonderful things can be achieved.</p>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/rhythm.jpg" class="img-fluid  rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Rhythm Choudhary</h6>
+          <p class="orange-text">
+            <strong>            
+              State Student Coordinator
+            </strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/manoj.jpg" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Manoj Kumar</h6>
+          <p class="orange-text">
+            <strong>Assistant Professor</strong>
+          </p>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/kanika.jpg" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Kanika Kundu</h6>
+          <p class="orange-text">
+            <strong>Assistant Professor</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/ankit.jpg" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Ankit Jee</h6>
+          <p class="orange-text">
+            <strong>President</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/Male-Avatar.png" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Jatin Dahiya</h6>
+          <p class="orange-text">
+            <strong>Vice-President</strong>
+          </p>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/abhishek.jpeg" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Abhishek Verma</h6>
+          <p class="orange-text">
+            <strong>Secretary</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center text-center">
+        <div *ngFor="let item of team" class="col-lg-4 col-sm-6 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <img src="assets/uploads/team/{{ item.thumb }}" class="img-fluid rounded-circle z-depth-1"/>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">{{ item.title }}</h6>
+          <p class="orange-text">
+            <strong>{{ item.designation }}</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
