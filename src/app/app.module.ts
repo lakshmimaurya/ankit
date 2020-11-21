@@ -12,6 +12,7 @@ import { PublicationComponent } from './pages/publication/publication.component'
 import { TeamComponent } from './pages/team/team.component';
 import { StudentComponent } from './pages/student/student.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ConventionComponent } from './pages/convention/convention.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ContactComponent } from './pages/contact/contact.component';
     PublicationComponent,
     TeamComponent,
     StudentComponent,
-    ContactComponent
+    ContactComponent,
+    ConventionComponent
   ],
   imports: [
     BrowserModule,

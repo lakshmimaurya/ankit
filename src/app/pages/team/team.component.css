@@ -10,3 +10,9 @@ hr {
 .rounded-circle {
   box-shadow: 0 2px 5px 0 #ff9800,0 2px 10px 0 #ff9800!important;
 }
+
+@media screen and (max-width:524px) {
+  main {
+    margin-top:2rem;
+  }
+}
