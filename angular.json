@@ -22,9 +22,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-			  "src/CNAME"
-======
->>>>>>> 614f1a3dcb149ec67601c47602bd2f628a16e9dd
+              "src/CNAME"
             ],
             "styles": [
               "src/styles.css"

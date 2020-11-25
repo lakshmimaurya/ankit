@@ -24,13 +24,13 @@ export class TeamComponent implements OnInit {
     {
       id: "3",
       title: "Jatin Bagga",
-      designation: "Promotions Lead",
+      designation: "Public Relations Lead",
       thumb: "bagga.jpeg"
     },
     {
       id: "4",
       title: "Ansh Bhatia",
-      designation: "Public Relations Lead",
+      designation: "Promotions Lead",
       thumb: "ansh.jpg"
     },
     {
