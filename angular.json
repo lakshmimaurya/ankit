@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "ncsiwebsite"
+  "defaultProject": "ncsiwebsite",
+  "cli": {
+    "analytics": false
+  }
 }
