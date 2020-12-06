@@ -89,6 +89,12 @@ export class PublicationComponent implements OnInit {
       thumb: "adhyan.png",
       link: "http://www.csi-india.org/downloads/pdf/3/csi%20adhyayan%20jan-mar%202020.pdf",
       month: "Jan-Mar 2020"
+    },
+    {
+      id: "3",
+      thumb: "adhyan.png",
+      link: "http://www.csi-india.org/downloads/pdf/3/CSI%20Adhyayan%20jul-sep%202020.pdf",
+      month: "Jul-Sep 2020"
     }
   ]
 
