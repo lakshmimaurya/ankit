@@ -17,30 +17,18 @@ export class TeamComponent implements OnInit {
     },
     {
       id: "2",
-      title: "Himanshu Gulia",
-      designation: "Website & Technical Lead",
-      thumb: "Male-Avatar.png"
-    },
-    {
-      id: "3",
       title: "Jatin Bagga",
       designation: "Public Relations Lead",
       thumb: "bagga.jpeg"
     },
     {
-      id: "4",
-      title: "Ansh Bhatia",
-      designation: "Promotions Lead",
-      thumb: "ansh.jpg"
-    },
-    {
-      id: "5",
+      id: "3",
       title: "Debaangshu Sen",
       designation: "Designing Lead",
       thumb: "deb.jpg"
     },
     {
-      id: "6",
+      id: "4ng build",
       title: "Aditya Negi",
       designation: "Finance Lead",
       thumb: "aditya.jpeg"
