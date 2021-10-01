@@ -1,0 +1,329 @@
+<!-- List Events -->
+
+<table class="table green lighten-5 align-middle border my-1 text-center">
+  <thead>
+    <tr>
+      <th scope="col" class="font-weight-bold">Event Name</th>
+      <th scope="col" class="font-weight-bold">Start Date</th>
+      <th scope="col" class="font-weight-bold">End Date</th>
+      <th scope="col" class="font-weight-bold">Venue</th>
+      <th scope="col" class="font-weight-bold">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events">
+      <td>{{ event.title }}</td>
+      <td>{{ event.start | date:'dd-MMM-YYYY' }}</td>
+      <td>{{ event.end | date:'dd-MMM-YYYY' }}</td>
+      <td>{{ event.venue }}</td>
+      <td>
+        <a href="" data-toggle="modal" data-target="#viewEventModal" (click)="onViewEvent(event.id)">
+          <i class="far fa-eye text-success fa-lg px-2"></i>
+        </a>
+        <a href="" data-toggle="modal" data-target="#editEventModal" (click)="onEditEvent(event.id)">
+          <i class="far fa-edit text-primary fa-lg  px-2"></i>
+        </a>
+        <a href="" data-toggle="modal" data-target="#deleteEventModal" (click)="onDelete(event.id, event.title)">
+          <i class="fas fa-trash text-danger fa-lg px-2"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Preview Event Modal -->
+
+<div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-labelledby="viewEventModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">{{ event.title }}
+        </p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body p-0">
+
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <picture class="imagepos">
+              <source media="(min-width: 768px)" [srcset]="event.bannerImagePath">
+              <source media="(max-width: 524px)" [srcset]="event.phoneBannerImagePath">
+              <img class="img-fluid" [src]="event.bannerImagePath" alt="">
+            </picture>
+          </div>
+          <div class="col-12 col-md-12">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-md-8">
+                  <h5 class="text-left orange-text"><strong>Event Details </strong> </h5>
+                  <ul class="text-left">
+                    <li>{{event.description}}
+                    </li>
+                  </ul>
+
+                  <h5 class="text-left orange-text"><strong>Registration fee</strong></h5>
+                  <ul class="text-left">
+                    <li *ngIf="event.entryFees == '0'">Free of cost</li>
+                    <li *ngIf="event.entryFees != '0'">{{ event.entryFees | currency:'INR':'symbol':'.0'}}</li>
+                  </ul>
+
+                  <h5 class="text-left orange-text"><strong>Date & Time</strong></h5>
+                  <ul class="text-left">
+                    <li><strong>Start: {{event.start | date:'dd-MMM-YYYY h:mm a'}}</strong></li>
+                    <li><strong>End: {{event.end | date:'dd-MMM-YYYY h:mm a'}}</strong></li>
+                  </ul>
+
+                  <h5 class="text-left orange-text"><strong>Platform</strong></h5>
+                  <ul class="text-left">
+                    <li>{{event.venue}}</li>
+                  </ul>
+
+                  <h5 class="text-left orange-text"><strong>Contact</strong> </h5>
+                  <p>For any queries, please contact:</p>
+                  <ul class="text-left">
+                    <li>{{event.personOne}}
+                      <p class="mb-0"><a href="tel:{{event.personOneContact}}"><i
+                            class="fas fa-phone fa-rotate-90 mr-2"></i> {{event.personOneContact}}</a></p>
+                      <p><a href="mailto:{{event.personOneEmail}}"><i
+                            class="fas fa-envelope mr-2"></i>{{event.personOneEmail}}</a></p>
+                    </li>
+                    <li *ngIf="event.personTwo">{{event.personTwo}}
+                      <p class="mb-0"><a href="tel:{{event.personTwoContact}}"><i
+                            class="fas fa-phone fa-rotate-90 mr-2"></i> {{event.personTwoContact}}</a></p>
+                      <p><a href="mailto:{{event.personTwoEmail}}"><i
+                            class="fas fa-envelope mr-2"></i>{{event.personTwoEmail}}</a></p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <a href="assets/uploads/reports/Report_CSI_Special Lecture_22.12.2020.pdf" target="_blank"
+          class="btn btn-warning">Report</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Event Modal -->
+
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Edit Event</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeEditEventForm">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <form class="white border col-11 col-lg-12" [formGroup]='myEventEditForm' (ngSubmit)="onSaveEvent()">
+        <div class="modal-body p-0">
+          <div class="card-body">
+
+            <div class="row justify-content-center text-left">
+
+              <div class="col-md-12">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Event Name</p>
+                  <input type="text" id="event-name" class="form-control"
+                    [formControl]="myEventEditForm.controls['title']">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Start</p>
+                  <input type="text" id="sdate" class="form-control" [formControl]="myEventEditForm.controls['start']">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="md-form mb-2">
+                  <p class="mb-0">End</p>
+                  <input type="text" id="edate" class="form-control" [formControl]="myEventEditForm.controls['end']">
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Reggistration Fee</p>
+                  <input type="number" id="rfee" class="form-control"
+                    [formControl]="myEventEditForm.controls['entryFees']">
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Registration Link</p>
+                  <input type="text" id="rlink" class="form-control"
+                    [formControl]="myEventEditForm.controls['registrationLink']">
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Venue/Platform</p>
+                  <input type="text" id="pltfm" class="form-control" [formControl]="myEventEditForm.controls['venue']">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Winner Prize</p>
+                  <input type="number" id="wprize" class="form-control"
+                    [formControl]="myEventEditForm.controls['prize1']">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="md-form mb-2">
+                  <p class="mb-0">1st Runner-Up Prize</p>
+                  <input type="number" id="fprize" class="form-control"
+                    [formControl]="myEventEditForm.controls['prize2']">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="md-form mb-2">
+                  <p class="mb-0">2nd Runner-Up Prize</p>
+                  <input type="number" id="sprize" class="form-control"
+                    [formControl]="myEventEditForm.controls['prize3']">
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-outline my-2">
+                  <textarea class="form-control" id="descptn" rows="4" placeholder="Description"
+                    [formControl]="myEventEditForm.controls['description']"></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Contact Person 1 Name</p>
+                  <input type="text" id="conname1" class="form-control"
+                    [formControl]="myEventEditForm.controls['personOne']">
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Email</p>
+                  <input type="email" id="conemail1" class="form-control mb-0"
+                    [formControl]="myEventEditForm.controls['personOneEmail']">
+                    <small *ngIf="myEventEditForm.controls['personOneEmail'].invalid" class="text-danger my-0">Invalid Email</small>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Phone</p>
+                  <input type="tel" id="conph1" class="form-control mb-0"
+                    [formControl]="myEventEditForm.controls['personOneContact']">
+                    <small *ngIf="myEventEditForm.controls['personOneContact'].invalid" class="text-danger my-0">Invalid Contact Number</small>
+                  </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Contact Person 2 Name</p>
+                  <input type="text" id="conname2" class="form-control"
+                    [formControl]="myEventEditForm.controls['personTwo']">
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Email</p>
+                  <input type="email" id="conemail2" class="form-control mb-0"
+                    [formControl]="myEventEditForm.controls['personTwoEmail']">
+                    <small *ngIf="myEventEditForm.controls['personTwoEmail'].invalid" class="text-danger my-0">Invalid Email</small>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="md-form mb-0">
+                  <p class="mb-0">Phone</p>
+                  <input type="tel" id="conph2" class="form-control mb-0"
+                    [formControl]="myEventEditForm.controls['personTwoContact']">
+                    <small *ngIf="myEventEditForm.controls['personTwoContact'].invalid" class="text-danger my-0">Invalid Contact Number</small>
+                </div>
+              </div>
+
+
+              <div class="col-md-12">
+                <p class="text-left mb-1 mt-2">Event Tile | <small>Resolution: 1:1</small></p>
+                <input type="file" class="form-control" (change)="onTilePicked($event)" />
+                <div class="row">
+                  <div class="col-3">
+                    <img [src]="eventTilePreview" [alt]="myEventEditForm.value.title" class="img-thumbnail" />
+                  </div>
+                </div>
+                <p class="text-left my-1 mt-2">Event Banner (large screen) | <small>Resolution: 16:9</small></p>
+                <input type="file" class="form-control" (change)="onBannerPicked($event)" />
+                <div class="row">
+                  <div class="col-3">
+                    <img [src]="eventBannerPreview" [alt]="myEventEditForm.value.title" class="img-thumbnail" />
+                  </div>
+                </div>
+                <p class="text-left my-1 mt-2">Event Banner (small screen) | <small>Resolution: 9:8</small></p>
+                <input type="file" class="form-control" (change)="onPhoneBannerPicked($event)" />
+                <div class="row">
+                  <div class="col-3">
+                    <img [src]="eventPhoneBannerPreview" [alt]="myEventEditForm.value.title" class="img-thumbnail" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center text-md-center mb-4">
+              <button type="submit" class="btn btn btn-orange btn-rounded">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Delete Event Modal -->
+
+<div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="deleteEventModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">{{ eventTitle }}</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeDeleteEventModal">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body p-0">
+        <div class="card-body">
+          <p>Are you sure you want to delete this event?</p>
+        </div>
+      </div>
+
+      <div class="modal-footer ">
+        <button type="submit" class="btn btn-success" (click)="onDeleteEvent()">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+    <!--/.Content-->
+  </div>
+</div>

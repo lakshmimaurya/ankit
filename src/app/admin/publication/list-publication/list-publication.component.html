@@ -1,0 +1,123 @@
+<!-- List Publications -->
+<table class="table align-middle my-3 border green lighten-5 text-center">
+  <thead>
+    <tr>
+      <th scope="col" class="font-weight-bold" >Category</th>
+      <th scope="col" class="font-weight-bold" >Month & Year</th>
+      <th scope="col" class="font-weight-bold">Edit/Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let publication of publications" >
+      <td *ngIf="publication.type=='adh'">Adhyayan</td>
+      <td *ngIf="publication.type=='com'">Communication</td>
+      <td>{{ publication.title | date:'MMMM YYYY' }}</td>
+      <td>
+        <a href="" data-toggle="modal" data-target="#editPublicationModal" (click)="onEditPublication(publication)">
+          <i class="far fa-edit text-primary fa-lg px-2"></i>
+        </a>
+        <a href="" data-toggle="modal" data-target="#deletePublicationModal" (click)="onDelete(publication.id, publication.title)">
+          <i class="fas fa-trash text-danger fa-lg px-2"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Delete Publciation Modal -->
+<div class="modal fade" id="deletePublicationModal" tabindex="-1" role="dialog" aria-labelledby="deletePublicationModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">{{ publicationTitle }}</p>
+        <button type="button" class="close" data-dismiss="modal" id="closeDeletePubModal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body p-0">
+        <div class="card-body">
+          <p>Are you sure you want to delete this event?</p>
+        </div>
+      </div>
+
+      <div class="modal-footer ">
+        <button type="submit" class="btn btn-success" (click)="onDeletePublication()">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Edit Publcaition Modal -->
+<div class="modal fade" id="editPublicationModal" tabindex="-1" role="dialog" aria-labelledby="editPublicationModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Publication Name</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeEditPubForm">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <form class="white border col-11 col-lg-12" [formGroup]='myEditForm' (ngSubmit)="onSavePublication()">
+        <div class="modal-body p-0">
+          <div class="card-body">
+
+            <!-- Grid row -->
+            <div class="row justify-content-center text-left">
+
+              <!-- Grid column -->
+              <div class="col-md-12">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Magazine Name</p>
+                  <input type="text" class="form-control" [formControl]="myEditForm.controls['title']">
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="md-form mb-2">
+                  <p class="mb-0">Magazine Link</p>
+                  <input type="text" class="form-control" [formControl]="myEditForm.controls['url']">
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <p class="text-left mb-1 mt-2">Magazine Image</p>
+                <input type="file" class="form-control" id="magimg" (change)="onImagePicked($event)" />
+                <div class="row">
+                  <div class="col-3">
+                    <img [src]="imagePreview" [alt]="myEditForm.value.title" class="img-thumbnail" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <p class="text-left mb-1 mt-2">Type</p>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" [formControl]="myEditForm.controls['type']"
+                    id="inlineRadio1" value="com" />
+                  <label class="form-check-label" for="inlineRadio1">Communication</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" [formControl]="myEditForm.controls['type']"
+                    id="inlineRadio2" value="adh" />
+                  <label class="form-check-label" for="inlineRadio2">Adhyayan</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer ">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="myEditForm.reset()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

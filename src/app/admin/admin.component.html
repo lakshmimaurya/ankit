@@ -1,0 +1,173 @@
+<main class="grey lighten-5">
+  <div class="container-fluid mt-md-5 py-md-5 px-0">
+    <section class=" px-md-5 px-4 mx-md-5 pt-3 pt-md-2 ">
+      <div class="row">
+        <div class="col-12 col-lg-12">
+          <div class="row my-3 align-items-center">
+            <div class="col-12 col-lg-10">
+              <h2>Welcome, Admin!</h2>
+            </div>
+            <div class="col-12  col-lg-2 col-sm-6 text-right">
+              <a class="button" class="btn btn-danger" (click)="onLogout()">Logout</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-8 align-items-center">
+              <img [src]="banners.homeBannerPath" alt="" class="img-fluid ">
+              <div class="row align-items-center my-4">
+                <div class="col-12 col-lg-6 col-sm-6 ">
+                  <a class="button" data-toggle="modal" data-target="#homeBannerModal"
+                    class="btn btn-success btn-block ">Change Website Banner</a>
+                </div>
+                <div class="col-12 col-lg-6 col-sm-6 ">
+                  <a class="button" data-toggle="modal" data-target="#phoneBannerModal"
+                    class="btn btn-success btn-block">Change Phone Banner</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <img [src]="banners.phoneBannerPath" alt="" class="img-fluid ">
+            </div>
+          </div>
+
+          <hr>
+        </div>
+        <div class="col-12 col-lg-12 ">
+          <div class="row align-items-center my-3">
+            <div class="col-12 col-lg-1 col-sm-6 ">
+              <h2 class="font-weight-bold pt-2 orange-text">Events</h2>
+            </div>
+            <div class="col-12 offset-lg-9 col-lg-2 col-sm-6 text-right">
+              <a class="button" data-toggle="modal" data-target="#addeventmodal" class="btn btn-success">Add New</a>
+            </div>
+          </div>
+          <list-event></list-event>
+        </div>
+        <div class="col-12 col-lg-12">
+          <div class="row align-items-center mt-3">
+            <div class="col-12 col-lg-2 col-sm-6 ">
+              <h2 class="font-weight-bold pt-2 orange-text">Publications</h2>
+            </div>
+            <div class="col-12 offset-lg-8 col-lg-2 col-sm-6 text-right">
+              <div class="row ">
+                <div class="col-12">
+                  <a class="button" data-toggle="modal" data-target="#addmagmodal" class="btn btn-success ">Add New</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <list-publication></list-publication>
+        </div>
+      </div>
+
+      <div class="modal fade" id="defaultmodal" tabindex="-1" role="dialog" aria-labelledby="defaultmodal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="heading lead">Default Banner</p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-0">
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <img src="assets/uploads/welcome-wall.jpg" alt="" class="img-fluid ">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="homeBannerModal" tabindex="-1" role="dialog" aria-labelledby="homeBannerModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="heading lead">Upload New Banner</p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body p-0">
+
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <div class="card-body">
+                    <input type="file" class="form-control" id="customFile" (change)="onHomeBannerPicked($event)" />
+                    <div class="row">
+                      <div class="col-3">
+                        <img [src]="homeBannerPreview" alt="Home Banner" class="img-thumbnail" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+              <button type="submit" class="btn btn-warning" (click)="saveBanner()">Save</button>
+              <button type="button" class="btn btn-outline-warning " data-dismiss="modal" id="closeHomeBanner">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="phoneBannerModal" tabindex="-1" role="dialog" aria-labelledby="phoneBannerModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="heading lead">Upload New Banner</p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body p-0">
+
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <div class="card-body">
+                    <input type="file" class="form-control" id="customFile" (change)="onPhoneBannerPicked($event)" />
+                    <div class="row">
+                      <div class="col-3">
+                        <img [src]="homeBannerPhonePreview" alt="Phone Banner" class="img-thumbnail" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+              <button type="submit" class="btn btn-warning" (click)="saveBanner()">Save</button>
+              <button type="button" class="btn btn-outline-warning " data-dismiss="modal" id="closeHomeBanner">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addeventmodal" tabindex="-1" role="dialog" aria-labelledby="addeventmodal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+          <create-event></create-event>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addmagmodal" tabindex="-1" role="dialog" aria-labelledby="addmagmodal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-lg" role="document">
+          <create-publication></create-publication>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

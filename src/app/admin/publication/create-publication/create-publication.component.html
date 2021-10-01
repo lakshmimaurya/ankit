@@ -1,0 +1,62 @@
+<div class="modal-content">
+  <div class="modal-header">
+      <p class="heading lead">Publication Name</p>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeCreatePubForm">
+          <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+  </div>
+
+  <form class="white border col-11 col-lg-12" [formGroup]='myForm' (ngSubmit)="onAddPublication()">
+      <div class="modal-body p-0">
+        <div class="card-body">
+  
+          <!-- Grid row -->
+          <div class="row justify-content-center text-left">
+  
+            <!-- Grid column -->
+            <div class="col-md-12">
+              <div class="md-form mb-2">
+                <p class="mb-0">Month & Year</p>
+                <input type="month" class="form-control" [formControl]="myForm.controls['title']">
+              </div>
+            </div>
+  
+            <div class="col-md-12">
+              <div class="md-form mb-2">
+                <p class="mb-0">Magazine Link</p>
+                <input type="url" class="form-control" [formControl]="myForm.controls['url']">
+              </div>
+            </div>
+  
+            <div class="col-md-12">
+              <p class="text-left mb-1 mt-2">Magazine Image | <small>Resolution: 1:1</small></p>
+              <input type="file" class="form-control" id="magimg" (change)="onImagePicked($event)" />
+
+              <div class="row" *ngIf="imagePreview !== '' && imagePreview && myForm.get('image').valid">
+                <div class="col-3">            
+                  <img [src]="imagePreview" [alt]="myForm.value.title" class="img-thumbnail"/>
+                </div>
+              </div>
+          
+            </div>
+  
+            <div class="col-md-12">
+              <p class="text-left mb-1 mt-2">Type</p>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="options" id="option2" [formControl]="myForm.controls['type']" value="com" />
+                <label class="form-check-label" for="option2">Communnication</label>
+                <input type="radio" class="form-check-input" name="options" id="option1" [formControl]="myForm.controls['type']" value="adh" />
+                <label class="form-check-label" for="option1">Adhyayan</label>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="modal-footer ">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="myForm.reset()">Cancel</button>
+      </div>
+    </form>
+  </div>
